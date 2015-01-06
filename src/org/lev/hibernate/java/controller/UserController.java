@@ -17,15 +17,10 @@ public class UserController {
 		// TODO Auto-generated method stub
 
 		User myUser = new User();
-
-		
 		myUser.setUserAge(23);
-		
-		String name="";
-		for (int i = 0; i < 100; i++) {
-			name+="-7777777777777777--7777777777777777--7777777777777777--7777777777777777--7777777777777777-";
-		}
-		myUser.setUserName(name);
+
+
+		myUser.setUserName("Vasia");
 		myUser.setDateOfBirth(new Date());
 
 		sessionFactory = createSessionFactory();
@@ -34,6 +29,14 @@ public class UserController {
 		session.beginTransaction();
 		session.save(myUser);
 		session.getTransaction().commit();
+		session.close();
+		
+		myUser=null;
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		myUser = (User) session.get(User.class, 2);
+		System.out.println(myUser.getUserId()+" User name="+myUser.getUserName());
 	
 	}
 

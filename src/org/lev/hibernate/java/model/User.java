@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
@@ -12,17 +14,17 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 
-@Entity(name = "User_model")
+@Entity(name = "User_model_next2")
 public class User {
 	@Id
-	@Column(name = "user_id")
+	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
-//	@Transient
-	@Lob
+	// @Transient
+	@Column
 	private String userName;
 
 	@Column(name = "user_age")
-	
 	private int userAge;
 
 	@Temporal(value = TemporalType.DATE)
