@@ -1,5 +1,7 @@
 package org.lev.hibernate.java.controller;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,9 +18,15 @@ public class UserController {
 
 		User myUser = new User();
 
-		myUser.setUserId(1);
+		
 		myUser.setUserAge(23);
-		myUser.setUserName("Vasia");
+		
+		String name="";
+		for (int i = 0; i < 100; i++) {
+			name+="-7777777777777777--7777777777777777--7777777777777777--7777777777777777--7777777777777777-";
+		}
+		myUser.setUserName(name);
+		myUser.setDateOfBirth(new Date());
 
 		sessionFactory = createSessionFactory();
 
