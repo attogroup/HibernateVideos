@@ -17,25 +17,28 @@ public class UserController {
 		User myUser = new User();
 
 		myUser.setUserId(1);
-myUser.setUserAge(23);
-myUser.setUserName("Vasia");
-	
+		myUser.setUserAge(23);
+		myUser.setUserName("Vasia");
 
 		sessionFactory = createSessionFactory();
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(myUser);
 		session.getTransaction().commit();
-		
-	}
-	public static SessionFactory createSessionFactory() {
-	    Configuration configuration = new Configuration();
-	    configuration.configure();
-	    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-	            configuration.getProperties()).build();
-	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-	    return sessionFactory;
-	}
 	
+	}
+
+private static  SessionFactory createSessionFactory() {
+	
+	Configuration configuration = new Configuration();
+	configuration.configure();
+	serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+	
+	sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	return sessionFactory;
+}
+	
+
+
 }
