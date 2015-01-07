@@ -3,6 +3,7 @@ package org.lev.hibernate.java.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 
+import com.java.lev.myproject.Address;
+
 @Entity(name = "User_model_next2")
 public class User {
 	@Id
@@ -23,6 +26,17 @@ public class User {
 	// @Transient
 	@Column
 	private String userName;
+	
+	@Embedded
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@Column(name = "user_age")
 	private int userAge;
