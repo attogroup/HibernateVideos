@@ -1,11 +1,14 @@
 package org.lev.hibernate.java.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -13,12 +16,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import com.java.lev.myproject.Address;
 
@@ -34,14 +42,18 @@ public class User {
 
 	@Embedded
 	private Address address;
-	@ElementCollection
-	private Set<Address> userAdressCollection = new HashSet();
 
-	public Set<Address> getUserAdressCollection() {
+	@ElementCollection
+	@JoinTable(name = "All_adresses", joinColumns = @JoinColumn(name = "ID_link"))
+	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
+	@CollectionId(columns = { @Column(name = "user_Adresses_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
+	private Collection<Address> userAdressCollection = new ArrayList<Address>();
+
+	public Collection<Address> getUserAdressCollection() {
 		return userAdressCollection;
 	}
 
-	public void setUserAdressCollection(Set<Address> userAdressCollection) {
+	public void setUserAdressCollection(Collection<Address> userAdressCollection) {
 		this.userAdressCollection = userAdressCollection;
 	}
 

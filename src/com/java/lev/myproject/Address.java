@@ -9,6 +9,7 @@ public class Address {
 	private String house;
 	private String room;
 	private String postCode;
+	
 	public String getStreet() {
 		return street;
 	}

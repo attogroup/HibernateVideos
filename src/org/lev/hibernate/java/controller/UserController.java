@@ -39,8 +39,7 @@ public class UserController {
 		myUser = getUser(2);
 
 		
-		System.out.println(myUser.getUserId() + " User name="
-				+ myUser.getUserName());
+		System.out.println("FINISHED");
 
 	}
 
