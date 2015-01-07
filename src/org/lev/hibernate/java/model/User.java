@@ -2,6 +2,8 @@ package org.lev.hibernate.java.model;
 
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -21,14 +23,32 @@ import com.java.lev.myproject.Address;
 public class User {
 	@Id
 	@Column
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	// @Transient
 	@Column
 	private String userName;
-	
+
 	@Embedded
 	private Address address;
+
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "street", column = @Column(name = "Office_street")),
+			@AttributeOverride(name = "house", column = @Column(name = "Office_house")),
+			@AttributeOverride(name = "room", column = @Column(name = "Office_room")),
+			@AttributeOverride(name = "postCode", column = @Column(name = "Office_postcode"))
+
+	})
+	private Address officeAdress;
+
+	public Address getOfficeAdress() {
+		return officeAdress;
+	}
+
+	public void setOfficeAdress(Address officeAdress) {
+		this.officeAdress = officeAdress;
+	}
 
 	public Address getAddress() {
 		return address;

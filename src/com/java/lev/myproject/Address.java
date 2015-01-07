@@ -8,7 +8,7 @@ public class Address {
 	private String street;
 	private String house;
 	private String room;
-	private String postcode;
+	private String postCode;
 	public String getStreet() {
 		return street;
 	}
@@ -27,11 +27,11 @@ public class Address {
 	public void setRoom(String room) {
 		this.room = room;
 	}
-	public String getPostcode() {
-		return postcode;
+	public String getPostCode() {
+		return postCode;
 	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
 
 	
