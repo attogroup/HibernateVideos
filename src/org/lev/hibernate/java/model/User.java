@@ -6,7 +6,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,16 +21,15 @@ import com.java.lev.myproject.Address;
 
 @Entity(name = "User_model_next2")
 public class User {
-	
-//	@Column
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-	 @Transient
+	@Id
+	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-
+	// @Transient
 	@Column
 	private String userName;
 
-	@EmbeddedId
+	@Embedded
 	private Address address;
 
 	@Embedded
