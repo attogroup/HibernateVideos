@@ -1,6 +1,8 @@
 package org.lev.hibernate.java.controller;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,10 +37,17 @@ public class UserController {
 		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov3_Collection","Gylad 6","2"));
 		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov4_Collection","Gylad 6","2"));
 		saveUser(myUser2);
-		
+		myUser=null;
+//		System.out.println("Before read: "+myUser.getUserAdressCollection().size());
 		myUser = getUser(2);
 
+		Collection<Address> addresses =  myUser.getUserAdressCollection();
+		System.out.println("After read size: "+myUser.getUserAdressCollection().size());
 		
+		System.out.println("user name="+myUser.getUserName());
+		for (Address address : addresses) {
+			System.out.println("adress="+address.getStreet());
+		}
 		System.out.println("FINISHED");
 
 	}
@@ -59,7 +68,9 @@ public class UserController {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		return (User) session.get(User.class, id);
+		User user=(User) session.get(User.class, id);
+		session.close();
+		return user;
 	}
 
 	private static void saveUser(User myUser) {

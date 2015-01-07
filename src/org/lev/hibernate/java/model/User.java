@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,19 +44,11 @@ public class User {
 	@Embedded
 	private Address address;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@JoinTable(name = "All_adresses", joinColumns = @JoinColumn(name = "ID_link"))
 	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
 	@CollectionId(columns = { @Column(name = "user_Adresses_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
 	private Collection<Address> userAdressCollection = new ArrayList<Address>();
-
-	public Collection<Address> getUserAdressCollection() {
-		return userAdressCollection;
-	}
-
-	public void setUserAdressCollection(Collection<Address> userAdressCollection) {
-		this.userAdressCollection = userAdressCollection;
-	}
 
 	@Embedded
 	@AttributeOverrides({
@@ -66,6 +59,14 @@ public class User {
 
 	})
 	private Address officeAdress;
+
+	public Collection<Address> getUserAdressCollection() {
+		return userAdressCollection;
+	}
+
+	public void setUserAdressCollection(Collection<Address> userAdressCollection) {
+		this.userAdressCollection = userAdressCollection;
+	}
 
 	public Address getOfficeAdress() {
 		return officeAdress;
