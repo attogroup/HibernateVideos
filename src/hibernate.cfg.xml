@@ -29,5 +29,6 @@
 
 
 		<mapping class="org.lev.hibernate.java.model.User" />
+		<mapping class="org.lev.hibernate.java.model.Car"/>
 	</session-factory>
 </hibernate-configuration>

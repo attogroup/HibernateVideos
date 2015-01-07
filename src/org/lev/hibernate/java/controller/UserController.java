@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.lev.hibernate.java.model.Car;
+import org.lev.hibernate.java.model.MyData;
 import org.lev.hibernate.java.model.User;
 
 import com.java.lev.myproject.Address;
@@ -26,28 +28,17 @@ public class UserController {
 		myUser.setUserName("First one");
 		myUser.setDateOfBirth(new Date());
 		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2"));
-		myUser.setOfficeAdress(fillUserAdress("Arlosorov_Office","Gylad 6_Office","2_Office"));
-
-		myUser.getUserAdressCollection().add(fillUserAdress("Arlosorov1_Collection","Gylad 6","2"));
-		myUser.getUserAdressCollection().add(fillUserAdress("Arlosorov2_Collection","Gylad 6","2"));
+		Car car = new Car();
+		car.setCarName("Volga");
+		car.setCarYear("1988");
+		myUser.setCar(car);
+//		saveUser(car);
 		saveUser(myUser);
-
-		User myUser2 = new User();
-		myUser2.setUserName("Second one");
-		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov3_Collection","Gylad 6","2"));
-		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov4_Collection","Gylad 6","2"));
-		saveUser(myUser2);
+		
 		myUser=null;
 //		System.out.println("Before read: "+myUser.getUserAdressCollection().size());
-		myUser = getUser(2);
+//		myUser = getUser(1);
 
-		Collection<Address> addresses =  myUser.getUserAdressCollection();
-		System.out.println("After read size: "+myUser.getUserAdressCollection().size());
-		
-		System.out.println("user name="+myUser.getUserName());
-		for (Address address : addresses) {
-			System.out.println("adress="+address.getStreet());
-		}
 		System.out.println("FINISHED");
 
 	}
@@ -73,7 +64,7 @@ public class UserController {
 		return user;
 	}
 
-	private static void saveUser(User myUser) {
+	private static void saveUser(MyData myUser) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(myUser);
