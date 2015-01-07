@@ -16,19 +16,26 @@ public class UserController {
 	private static ServiceRegistry serviceRegistry;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		sessionFactory = createSessionFactory();
 
 		User myUser = new User();
 		myUser.setUserAge(23);
-		myUser.setUserName("Vasia");
+		myUser.setUserName("First one");
 		myUser.setDateOfBirth(new Date());
 		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2"));
 		myUser.setOfficeAdress(fillUserAdress("Arlosorov_Office","Gylad 6_Office","2_Office"));
 
+		myUser.getUserAdressCollection().add(fillUserAdress("Arlosorov1_Collection","Gylad 6","2"));
+		myUser.getUserAdressCollection().add(fillUserAdress("Arlosorov2_Collection","Gylad 6","2"));
 		saveUser(myUser);
-		myUser = null;
+
+		User myUser2 = new User();
+		myUser2.setUserName("Second one");
+		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov3_Collection","Gylad 6","2"));
+		myUser2.getUserAdressCollection().add(fillUserAdress("Arlosorov4_Collection","Gylad 6","2"));
+		saveUser(myUser2);
+		
 		myUser = getUser(2);
 
 		

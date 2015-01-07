@@ -1,10 +1,13 @@
 package org.lev.hibernate.java.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +34,16 @@ public class User {
 
 	@Embedded
 	private Address address;
+	@ElementCollection
+	private Set<Address> userAdressCollection = new HashSet();
+
+	public Set<Address> getUserAdressCollection() {
+		return userAdressCollection;
+	}
+
+	public void setUserAdressCollection(Set<Address> userAdressCollection) {
+		this.userAdressCollection = userAdressCollection;
+	}
 
 	@Embedded
 	@AttributeOverrides({
