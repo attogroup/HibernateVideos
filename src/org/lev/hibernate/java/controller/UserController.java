@@ -24,26 +24,32 @@ public class UserController {
 		myUser.setUserAge(23);
 		myUser.setUserName("Vasia");
 		myUser.setDateOfBirth(new Date());
-		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2"));
-		myUser.setOfficeAdress(fillUserAdress("Arlosorov_Office","Gylad 6_Office","2_Office"));
+		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2","2333"));
+		myUser.setOfficeAdress(fillUserAdress("Arlosorov_Office","Gylad 6_Office","2_Office","Office_postCode"));
 
 		saveUser(myUser);
-		myUser = null;
-		myUser = getUser(2);
+//		myUser = null;
+		myUser.setAddress(fillUserAdress("Arlosorov2","Gylad 6","2","2333"));
+		myUser.setOfficeAdress(fillUserAdress("Arlosorov_Office","Gylad 6_Office","2_Office","Office_postCode"));
 
+		saveUser(myUser);
 		
-		System.out.println(myUser.getUserId() + " User name="
-				+ myUser.getUserName());
+//		myUser = getUser(2);
+//
+//		
+//		System.out.println(myUser.getUserId() + " User name="
+//				+ myUser.getUserName());
 
 	}
 
 
-	private static Address fillUserAdress(String street,String house,String room) {
+	private static Address fillUserAdress(String street,String house,String room, String postCode) {
 		// TODO Auto-generated method stub
 		Address address = new Address();
 		address.setStreet(street);
 		address.setHouse(house);
 		address.setRoom(room);
+		address.setPostCode(postCode);
 		return address;
 	}
 
@@ -53,7 +59,9 @@ public class UserController {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		return (User) session.get(User.class, id);
+		User user =(User) session.get(User.class, id);
+		session.close();
+		return user;
 	}
 
 	private static void saveUser(User myUser) {

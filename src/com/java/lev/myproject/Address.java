@@ -1,9 +1,11 @@
 package com.java.lev.myproject;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address {
+public class Address implements Serializable{
 
 	private String street;
 	private String house;
