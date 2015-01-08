@@ -32,8 +32,15 @@ public class UserController {
 		car.setCarName("Volga");
 		car.setCarYear("1988");
 		myUser.setCar(car);
-//		saveUser(car);
-		saveUser(myUser);
+	
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(myUser);
+		session.save(car);
+		session.getTransaction().commit();
+		session.close();
+		
+//		saveUser(myUser);
 		
 		myUser=null;
 //		System.out.println("Before read: "+myUser.getUserAdressCollection().size());
