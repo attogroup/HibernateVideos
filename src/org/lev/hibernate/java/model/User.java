@@ -1,5 +1,7 @@
 package org.lev.hibernate.java.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -10,9 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
+
+
 
 
 
@@ -31,19 +39,21 @@ public class User implements MyData{
 	@Column
 	private String userName;
 
-    @OneToOne
-	@JoinColumn(name="User_cars")
-	private Car car;
+    @OneToMany(cascade={CascadeType.ALL})
+	@JoinTable(name="carsVSusers",joinColumns=@JoinColumn(name="user"),inverseJoinColumns = @JoinColumn(name="car"))
+	private Collection<Car> cars = new ArrayList<Car>();
+    
 	@Embedded
 	private Address address;
 
 
-	public Car getCar() {
-		return car;
+	
+	public Collection<Car> getCars() {
+		return cars;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setCars(Collection<Car> cars) {
+		this.cars = cars;
 	}
 
 	public Address getAddress() {

@@ -28,23 +28,28 @@ public class UserController {
 		myUser.setUserName("First one");
 		myUser.setDateOfBirth(new Date());
 		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2"));
-		Car car = new Car();
-		car.setCarName("Volga");
-		car.setCarYear("1988");
-		myUser.setCar(car);
-	
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(myUser);
-		session.save(car);
-		session.getTransaction().commit();
-		session.close();
+		for (int i = 0; i < 10; i++) {
+			Car car = new Car();
+			car.setCarName("Volga");
+			car.setCarYear(2000+i);
+			car.setUserCarOwner(myUser);
+			myUser.getCars().add(car);	
+		}
 		
-//		saveUser(myUser);
+		User myUser2 =new User();
+		myUser2.setUserName("Second user");
+		for (int i = 0; i < 10; i++) {
+			Car car = new Car();
+			car.setCarName("Lada");
+			car.setCarYear(1900+i);
+			car.setUserCarOwner(myUser2);
+			myUser2.getCars().add(car);	
+		}
+
 		
+		saveUser(myUser);
+		saveUser(myUser2);
 		myUser=null;
-//		System.out.println("Before read: "+myUser.getUserAdressCollection().size());
-//		myUser = getUser(1);
 
 		System.out.println("FINISHED");
 
