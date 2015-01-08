@@ -27,22 +27,24 @@ public class UserController {
 		myUser.setUserAge(23);
 		myUser.setUserName("First one");
 		myUser.setDateOfBirth(new Date());
-		myUser.setAddress(fillUserAdress("Arlosorov","Gylad 6","2"));
+		myUser.setAddress(fillUserAdress("FIRST_Arlosorov","Gylad 6","2"));
 		for (int i = 0; i < 10; i++) {
 			Car car = new Car();
 			car.setCarName("Volga");
 			car.setCarYear(2000+i);
-			car.setUserCarOwner(myUser);
+			car.getUsers().add(myUser);
 			myUser.getCars().add(car);	
 		}
 		
 		User myUser2 =new User();
 		myUser2.setUserName("Second user");
+		myUser.setAddress(fillUserAdress("Second_Arlosorov","Gylad 6","2"));
 		for (int i = 0; i < 10; i++) {
 			Car car = new Car();
 			car.setCarName("Lada");
 			car.setCarYear(1900+i);
-			car.setUserCarOwner(myUser2);
+			car.getUsers().add(myUser2);
+			car.getUsers().add(myUser);
 			myUser2.getCars().add(car);	
 		}
 
