@@ -2,6 +2,7 @@ package org.lev.hibernate.java.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class Car implements MyData {
@@ -22,25 +27,7 @@ public class Car implements MyData {
 	@Column
 	private int carYear;
 
-	@ManyToMany
-	@JoinTable(name = "contracts", joinColumns = @JoinColumn(name = "carID"), inverseJoinColumns = @JoinColumn(name = "userID"))
-	private Collection<User> users = new ArrayList<User>();
 
-	public int getCarsId() {
-		return carsId;
-	}
-
-	public void setCarsId(int carsId) {
-		this.carsId = carsId;
-	}
-
-	public Collection<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Collection<User> users) {
-		this.users = users;
-	}
 
 	public String getCarName() {
 		return carName;

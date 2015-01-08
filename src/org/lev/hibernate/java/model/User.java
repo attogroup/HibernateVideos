@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -31,22 +32,10 @@ public class User implements MyData{
 	@Column
 	private String userName;
 
-    @ManyToMany(cascade={CascadeType.ALL},mappedBy="users")
-	private Collection<Car> cars = new ArrayList<Car>();
-    
-	@Embedded
+ 	@Embedded
 	private Address address;
 
-
 	
-	public Collection<Car> getCars() {
-		return cars;
-	}
-
-	public void setCars(Collection<Car> cars) {
-		this.cars = cars;
-	}
-
 	public Address getAddress() {
 		return address;
 	}

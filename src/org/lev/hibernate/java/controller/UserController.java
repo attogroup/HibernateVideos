@@ -23,65 +23,26 @@ public class UserController {
 
 		sessionFactory = createSessionFactory();
 
-		User myUser = new User();
-		myUser.setUserAge(23);
-		myUser.setUserName("First one");
-		myUser.setDateOfBirth(new Date());
-		myUser.setAddress(fillUserAdress("FIRST_Arlosorov","Gylad 6","2"));
-		for (int i = 0; i < 10; i++) {
-			Car car = new Car();
-			car.setCarName("Volga");
-			car.setCarYear(2000+i);
-			car.getUsers().add(myUser);
-			myUser.getCars().add(car);	
-		}
+		Porshe porshe = new Porshe();
+		porshe.setPorsheModel("Porshe model");
+		Masda masda = new Masda();
+		masda.setMasdaModel("Masda Model");
+		saveCar(masda);
+		saveCar(porshe);
 		
-		User myUser2 =new User();
-		myUser2.setUserName("Second user");
-		myUser.setAddress(fillUserAdress("Second_Arlosorov","Gylad 6","2"));
-		for (int i = 0; i < 10; i++) {
-			Car car = new Car();
-			car.setCarName("Lada");
-			car.setCarYear(1900+i);
-			car.getUsers().add(myUser2);
-			car.getUsers().add(myUser);
-			myUser2.getCars().add(car);	
-		}
-
 		
-		saveUser(myUser);
-		saveUser(myUser2);
-		myUser=null;
+		
 
 		System.out.println("FINISHED");
 
 	}
 
 
-	private static Address fillUserAdress(String street,String house,String room) {
-		// TODO Auto-generated method stub
-		Address address = new Address();
-		address.setStreet(street);
-		address.setHouse(house);
-		address.setRoom(room);
-		return address;
-	}
 
-	private static User getUser(int id) {
-
-		Session session = sessionFactory.openSession();
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		User user=(User) session.get(User.class, id);
-		session.close();
-		return user;
-	}
-
-	private static void saveUser(MyData myUser) {
+	private static void saveCar(Car myCar) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(myUser);
+		session.save(myCar);
 		session.getTransaction().commit();
 		session.close();
 	}
