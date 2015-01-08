@@ -1,6 +1,5 @@
 package org.lev.hibernate.java.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class Car implements MyData{
 	private int carYear;
 	
 	@ManyToOne 
-	@JoinColumn(name="Owners_ID")
+	@JoinColumn(name="userID")
 	private User userCarOwner;
 	
 

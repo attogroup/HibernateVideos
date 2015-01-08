@@ -17,16 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-
-
-
-
-
-
-
-
-
 import com.java.lev.myproject.Address;
 
 @Entity
@@ -39,8 +29,7 @@ public class User implements MyData{
 	@Column
 	private String userName;
 
-    @OneToMany(cascade={CascadeType.ALL})
-	@JoinTable(name="carsVSusers",joinColumns=@JoinColumn(name="user"),inverseJoinColumns = @JoinColumn(name="car"))
+    @OneToMany(cascade={CascadeType.ALL},mappedBy="userCarOwner")
 	private Collection<Car> cars = new ArrayList<Car>();
     
 	@Embedded
