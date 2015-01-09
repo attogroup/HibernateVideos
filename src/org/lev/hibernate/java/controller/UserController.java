@@ -10,7 +10,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.lev.hibernate.java.model.Car;
+import org.lev.hibernate.java.model.Masda;
 import org.lev.hibernate.java.model.MyData;
+import org.lev.hibernate.java.model.Porshe;
 import org.lev.hibernate.java.model.User;
 
 import com.java.lev.myproject.Address;
@@ -23,22 +25,20 @@ public class UserController {
 
 		sessionFactory = createSessionFactory();
 
-		Porshe porshe = new Porshe();
-		porshe.setPorsheModel("Porshe model");
-		Masda masda = new Masda();
-		masda.setMasdaModel("Masda Model");
-		saveCar(masda);
-		saveCar(porshe);
-		
-		
-		
+		Porshe carPorshe = new Porshe();
+		carPorshe.setPorsheModel("Porshe model");
+		Masda carMasda = new Masda();
+		carMasda.setMasdaModel("Masda Model");
+		Car myCar = new Car();
+		myCar.setCarName("My ooold Car");
+		saveCar(myCar);
+		saveCar(carMasda);
+		saveCar(carPorshe);
 
 		System.out.println("FINISHED");
 
 	}
-
-
-
+	
 	private static void saveCar(Car myCar) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

@@ -30,7 +30,7 @@
 
 		<mapping class="org.lev.hibernate.java.model.User" />
 		<mapping class="org.lev.hibernate.java.model.Car"/>
-		<mapping class="org.lev.hibernate.java.controller.Masda"/>
-		<mapping class="org.lev.hibernate.java.controller.Porshe"/>
+		<mapping class="org.lev.hibernate.java.model.Masda"/>
+		<mapping class="org.lev.hibernate.java.model.Porshe"/>
 	</session-factory>
 </hibernate-configuration>

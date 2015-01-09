@@ -1,10 +1,10 @@
-package org.lev.hibernate.java.controller;
+package org.lev.hibernate.java.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.lev.hibernate.java.model.Car;
-
 @Entity
+@DiscriminatorValue(value="Porshe_class")
 public class Porshe extends Car {
 
 	private String porsheModel;
