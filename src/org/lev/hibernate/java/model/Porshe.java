@@ -4,7 +4,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue(value="Porshe_class")
 public class Porshe extends Car {
 
 	private String porsheModel;
