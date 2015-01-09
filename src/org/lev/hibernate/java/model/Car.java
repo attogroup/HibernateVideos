@@ -22,7 +22,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Car implements MyData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
