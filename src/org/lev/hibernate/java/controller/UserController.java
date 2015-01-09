@@ -23,21 +23,35 @@ public class UserController {
 
 	public static void main(String[] args) {
 
-		sessionFactory = createSessionFactory();
+		
+	int id=4;
+	Car myCar = getById(id);
+	
+	System.out.println("Car id="+id+" name="+myCar.getCarName());
+	
 
-		Porshe carPorshe = new Porshe();
-		carPorshe.setPorsheModel("Porshe model");
-		Masda carMasda = new Masda();
-		carMasda.setMasdaModel("Masda Model");
-		Car myCar = new Car();
-		myCar.setCarName("My ooold Car");
-		saveCar(myCar);
-		saveCar(carMasda);
-		saveCar(carPorshe);
 
+	
 		System.out.println("FINISHED");
 
 	}
+	private static Car getById(int ID){
+		Car myCar= new Car();
+		sessionFactory=createSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		myCar=(Car)session.get(Car.class, ID);
+		myCar.setCarName("Updated Value");
+		session.update(myCar);
+		session.getTransaction().commit();
+		session.beginTransaction();
+		session.delete(myCar);
+		session.getTransaction().commit();
+		session.close();
+		
+		return myCar;
+	}
+	
 	
 	private static void saveCar(Car myCar) {
 		Session session = sessionFactory.openSession();
