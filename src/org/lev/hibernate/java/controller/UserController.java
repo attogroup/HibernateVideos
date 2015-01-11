@@ -42,7 +42,14 @@ public class UserController {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from User ");
+		Integer id0=2;
+		Integer id1=10;
+//		Query query = session.createQuery("from User where userId>? and userId <?");
+//		query.setInteger(0, id0);
+//		query.setInteger(1, id1);
+		Query query = session.createQuery("from User where userId>:id0 and userId<:id1");
+		query.setInteger("id0", id0);
+		query.setInteger("id1", id1);
 		Collection<User> arrayList = new ArrayList<User>();
 		query.setFirstResult(3);
 		query.setMaxResults(10);
