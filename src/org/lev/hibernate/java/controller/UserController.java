@@ -1,9 +1,11 @@
 package org.lev.hibernate.java.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -23,40 +25,43 @@ public class UserController {
 
 	public static void main(String[] args) {
 
+		for (int i = 0; i < 10; i++) {
+			User myUser = new User();
+			myUser.setUserName("user#"+i);
+			saveUser(myUser);	
+		}
 		
-	int id=4;
-	Car myCar = getById(id);
-	
-	System.out.println("Car id="+id+" name="+myCar.getCarName());
-	
-
-
-	
+		queryExecute();
 		System.out.println("FINISHED");
 
 	}
-	private static Car getById(int ID){
-		Car myCar= new Car();
-		sessionFactory=createSessionFactory();
+
+	
+	
+	private static void queryExecute() {
+		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		myCar=(Car)session.get(Car.class, ID);
-		myCar.setCarName("Updated Value");
-		session.update(myCar);
+		Query query = session.createQuery("from User where userId<4");
+		Collection<User> arrayList = new ArrayList<User>();
+		arrayList = query.list();
 		session.getTransaction().commit();
-		session.beginTransaction();
-		session.delete(myCar);
-		session.getTransaction().commit();
+		
+		for (User user : arrayList) {
+			System.out.println(user.getUserName());
+		}
+		
 		session.close();
 		
-		return myCar;
 	}
-	
-	
-	private static void saveCar(Car myCar) {
+
+
+
+	private static void saveUser(User myUser) {
+		sessionFactory = createSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(myCar);
+		session.save(myUser);
 		session.getTransaction().commit();
 		session.close();
 	}
