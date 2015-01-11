@@ -15,14 +15,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.NaturalIdCache;
+
 import com.java.lev.myproject.Address;
 
 @Entity
+@NamedQuery(name="getById",query="from User where userId=? ")
+@NamedNativeQuery(name="getByName",query="select * from User where userName=:name",resultClass=User.class)
 public class User implements MyData{
 	@Id
 	@Column
