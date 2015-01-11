@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -48,11 +49,16 @@ public class UserController {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
+		User exampleUser = new User();
+		exampleUser.setUserName("user#0");
 
-		Criteria criteria = session.createCriteria(User.class);
-
-		criteria.addOrder(Order.desc("userId"));
+		Example example = Example.create(exampleUser);
 		
+		Criteria criteria = session.createCriteria(User.class)
+				.add(example);
+
+		
+
 		Collection<User> arrayList = new ArrayList<User>();
 		
 		arrayList = (ArrayList<User>)criteria.list();
