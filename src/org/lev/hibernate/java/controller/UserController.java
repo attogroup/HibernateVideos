@@ -42,8 +42,10 @@ public class UserController {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from User where userId<4");
+		Query query = session.createQuery("from User ");
 		Collection<User> arrayList = new ArrayList<User>();
+		query.setFirstResult(3);
+		query.setMaxResults(10);
 		arrayList = query.list();
 		session.getTransaction().commit();
 		
