@@ -48,7 +48,7 @@ public class UserController {
 
 		Criteria criteria = session.createCriteria(User.class);
 //		criteria.add(Restrictions.eq("userName", "user#9"));
-		criteria.add(Restrictions.eq("userId", 3));
+		criteria.add(Restrictions.or(Restrictions.between("userId", 3, 5),Restrictions.between("userId",8, 10)));
 		
 		Collection<User> arrayList = new ArrayList<User>();
 		arrayList = (ArrayList<User>)criteria.list();
