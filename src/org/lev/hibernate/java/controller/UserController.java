@@ -11,6 +11,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.lev.hibernate.java.model.Car;
@@ -47,10 +50,11 @@ public class UserController {
 
 
 		Criteria criteria = session.createCriteria(User.class);
-//		criteria.add(Restrictions.eq("userName", "user#9"));
-		criteria.add(Restrictions.or(Restrictions.between("userId", 3, 5),Restrictions.between("userId",8, 10)));
+
+		criteria.addOrder(Order.desc("userId"));
 		
 		Collection<User> arrayList = new ArrayList<User>();
+		
 		arrayList = (ArrayList<User>)criteria.list();
 		session.getTransaction().commit();
 		
