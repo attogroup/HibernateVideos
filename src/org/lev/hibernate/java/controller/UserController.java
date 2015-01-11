@@ -31,7 +31,7 @@ public class UserController {
 
 	public static void main(String[] args) {
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 30; i++) {
 			User myUser = new User();
 			myUser.setUserName("user#"+i);
 			saveUser(myUser);	
@@ -50,9 +50,9 @@ public class UserController {
 		session.beginTransaction();
 
 		User exampleUser = new User();
-		exampleUser.setUserName("user#0");
+		exampleUser.setUserName("user#1%");
 
-		Example example = Example.create(exampleUser);
+		Example example = Example.create(exampleUser).enableLike();
 		
 		Criteria criteria = session.createCriteria(User.class)
 				.add(example);
