@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.lev.hibernate.java.model.Car;
 import org.lev.hibernate.java.model.Masda;
@@ -43,11 +45,13 @@ public class UserController {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Query query = session.getNamedQuery("getByName");
-		query.setString("name", "user#1");
+
+		Criteria criteria = session.createCriteria(User.class);
+//		criteria.add(Restrictions.eq("userName", "user#9"));
+		criteria.add(Restrictions.eq("userId", 3));
 		
 		Collection<User> arrayList = new ArrayList<User>();
-		arrayList = query.list();
+		arrayList = (ArrayList<User>)criteria.list();
 		session.getTransaction().commit();
 		
 		for (User user : arrayList) {

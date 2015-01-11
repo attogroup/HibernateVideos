@@ -28,7 +28,7 @@ import org.hibernate.annotations.NaturalIdCache;
 import com.java.lev.myproject.Address;
 
 @Entity
-@NamedQuery(name="getById",query="from User where userId=? ")
+@NamedQuery(name="getById",query="from User where userId<? ")
 @NamedNativeQuery(name="getByName",query="select * from User where userName=:name",resultClass=User.class)
 public class User implements MyData{
 	@Id
